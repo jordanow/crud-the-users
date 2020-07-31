@@ -7,13 +7,13 @@ import UserList from "./containers/UserList";
 
 export default function App() {
 	return (
-		<Container maxWidth="sm">
+		<Container maxWidth="md">
 			<Box my={4}>
 				<Header />
 			</Box>
-      <Box my={8}>
-      <UserList />
-      </Box>
+			<Box my={8}>
+				<UserList />
+			</Box>
 		</Container>
 	);
 }
