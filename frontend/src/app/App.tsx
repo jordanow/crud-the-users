@@ -1,13 +1,14 @@
 import React from "react";
+import Container from "@material-ui/core/Container";
+import Box from "@material-ui/core/Box";
+import Header from "./containers/Header";
 
-function App() {
+export default function App() {
 	return (
-		<div className="App">
-			<header className="App-header">
-        <h3>CRUD App</h3>
-			</header>
-		</div>
+		<Container maxWidth="sm">
+			<Box my={4}>
+				<Header />
+			</Box>
+		</Container>
 	);
 }
-
-export default App;
