@@ -5,7 +5,7 @@ import users from "../data/users.json";
 
 const appRoutes = express.Router();
 
-appRoutes.get("/users", (req, res) => {
+appRoutes.get("/api/users", (req, res) => {
 	return res.send({
 		users,
 	});
