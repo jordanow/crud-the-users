@@ -66,7 +66,6 @@ export default function SearchAppBar() {
 	useEffect(() => {
 		const getUsers = async () => {
 			const users = await filterUsers(searchText);
-			console.log(users);
 		};
 		getUsers();
 	}, [searchText]);

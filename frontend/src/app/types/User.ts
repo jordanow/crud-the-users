@@ -1,10 +1,8 @@
 export interface IUser {
-	name: string;
-	age: number;
-	balance: number;
-	company: string;
+	firstName: string;
+	lastName: string;
 	email: string;
-	gender: string;
+	userStatus: string;
 }
 
 export interface IUserListResponse {
