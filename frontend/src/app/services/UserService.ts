@@ -1,5 +1,5 @@
 import axios from "axios";
-import { IUserListResponse, IUser } from "../types/User";
+import { IUserListResponse } from "../../../../types/User";
 
 const getUsers = async (page: number = 1): Promise<IUserListResponse> => {
 	try {
@@ -11,14 +11,4 @@ const getUsers = async (page: number = 1): Promise<IUserListResponse> => {
 	}
 };
 
-// const filterUsers = async (searchQuery: string): Promise<IUser[]> => {
-// 	try {
-// 		const { users } = await getUsers();
-
-// 		return users.filter((user) => searchForProperties(user, searchQuery));
-// 	} catch (error) {
-// 		console.error(error);
-// 		throw error;
-// 	}
-// };
 export { getUsers };

@@ -1,4 +1,4 @@
-import { IUser } from "../../types/User";
+import { IUser } from "../../../../../types/User";
 import { FETCH_USERS, SET_USERS, UPDATE_USER, FILTER_USERS } from "./constants";
 
 type IAppState = {

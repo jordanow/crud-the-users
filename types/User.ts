@@ -3,13 +3,13 @@ export type IUserSearchParams = {
 	filterText: string;
 };
 
-export interface IUser {
+export type IUser = {
 	firstName: string;
 	lastName: string;
 	email: string;
 	userStatus: string;
-}
+};
 
-export interface IUserListResponse {
+export type IUserListResponse = {
 	users: IUser[];
-}
+};
