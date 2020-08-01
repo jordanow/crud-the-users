@@ -1,11 +1,12 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useReducer } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import Grid from "@material-ui/core/Grid";
 import Box from "@material-ui/core/Box";
 import Pagination from "@material-ui/lab/Pagination";
 import { getUsers } from "../services/UserService";
-import { IUser } from "../types/User";
 import UserDetailsCard from "../components/UserDetailsCard";
+import { AppReducer, initialAppState } from "../reducers/App";
+import { FETCH_USERS, SET_USERS } from "../reducers/App/constants";
 
 const useStyles = makeStyles((theme) => ({
 	root: {
@@ -22,17 +23,19 @@ const useStyles = makeStyles((theme) => ({
 
 export default function UserList() {
 	const classes = useStyles();
-	const [users, setUsers] = useState<IUser[]>([]);
 	const [currentPage, setCurrentPage] = useState<number>(1);
 
+	const [state, dispatch] = useReducer(AppReducer, initialAppState);
+
 	useEffect(() => {
-		const users = async () => {
-			const data = await getUsers();
-			setUsers(data.users);
+		const fetchUsers = async () => {
+			dispatch({ type: FETCH_USERS });
+			const data = await getUsers(currentPage);
+			dispatch({ type: SET_USERS, users: data.users });
 		};
 
-		users();
-	}, []);
+		fetchUsers();
+	}, [state.searchText, currentPage]);
 
 	const handleChangePage = (event: any, newPage: number) => {
 		setCurrentPage(newPage);
@@ -42,7 +45,7 @@ export default function UserList() {
 		<Grid container className={classes.root} spacing={2}>
 			<Grid item xs={12}>
 				<Grid container justify="center" spacing={2}>
-					{users.map((value) => (
+					{state.users.map((value) => (
 						<Grid key={value.email} item>
 							<UserDetailsCard user={value} />
 						</Grid>
@@ -51,7 +54,7 @@ export default function UserList() {
 				<Box my={4}>
 					<Grid container justify="center">
 						<Pagination
-							count={4}
+							count={9}
 							color="primary"
 							page={currentPage}
 							onChange={handleChangePage}

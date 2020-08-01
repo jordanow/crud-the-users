@@ -1,11 +1,12 @@
-import React, { ChangeEvent, useState, useEffect } from "react";
+import React, { ChangeEvent, useReducer } from "react";
 import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
 import Typography from "@material-ui/core/Typography";
 import InputBase from "@material-ui/core/InputBase";
 import { fade, makeStyles } from "@material-ui/core/styles";
 import SearchIcon from "@material-ui/icons/Search";
-import { filterUsers } from "../services/UserService";
+import { AppReducer, initialAppState } from "../reducers/App";
+import { FILTER_USERS } from "../reducers/App/constants";
 
 const useStyles = makeStyles((theme) => ({
 	root: {
@@ -61,17 +62,11 @@ const useStyles = makeStyles((theme) => ({
 
 export default function SearchAppBar() {
 	const classes = useStyles();
-	const [searchText, setSearchText] = useState<string>("");
-
-	useEffect(() => {
-		const getUsers = async () => {
-			const users = await filterUsers(searchText);
-		};
-		getUsers();
-	}, [searchText]);
+	const [state, dispatch] = useReducer(AppReducer, initialAppState);
 
 	const onChangeSearchInput = (event: ChangeEvent<HTMLInputElement>) => {
-		setSearchText(event.target.value);
+		const searchText = event.target.value;
+		dispatch({ type: FILTER_USERS, searchText });
 	};
 
 	return (

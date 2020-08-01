@@ -1,14 +1,11 @@
-import fs from "fs";
 import express from "express";
-
-import users from "../data/users.json";
+import { getUsers } from "../controllers/UserController";
 
 const appRoutes = express.Router();
 
 appRoutes.get("/api/users", (req, res) => {
-	return res.send({
-		users,
-	});
+	const { page, filterText } = req.query;
+	return res.send(getUsers(parseInt(page as string), filterText as string));
 });
 
 export default appRoutes;
