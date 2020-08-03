@@ -23,7 +23,6 @@ export function AppReducer(
 	state: IAppState = initialAppState,
 	action: Action
 ): IAppState {
-	console.log(action);
 	switch (action.type) {
 		case FETCH_USERS:
 			return {

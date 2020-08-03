@@ -4,6 +4,7 @@ import { IUser } from "../../../types/User";
 const USERS_LIMIT = 10;
 
 // Case insensitive search
+// Searches on all available fields
 export const searchForProperties = (
 	user: IUser,
 	searchText: string = ""
@@ -33,7 +34,7 @@ export const getUsers = (page: number = 1, searchText: string = "") => {
 	);
 
 	const startPage = page > 1 ? page * USERS_LIMIT : 0;
-	if (startPage + USERS_LIMIT <= users.length) {
+	if (startPage + USERS_LIMIT < filteredUsers.length) {
 		filteredUsers = filteredUsers.splice(startPage, USERS_LIMIT);
 	}
 
