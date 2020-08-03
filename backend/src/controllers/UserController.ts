@@ -1,6 +1,5 @@
 import users from "../data/users.json";
 import { IUser } from "../../../types/User";
-import { start } from "repl";
 
 const USERS_LIMIT = 10;
 
@@ -16,7 +15,6 @@ export const searchForProperties = (
 
 	keys.forEach((key) => {
 		const fieldValue: string = (user as any)[key];
-		console.log(fieldValue);
 		if (
 			fieldValue &&
 			typeof fieldValue === "string" &&
@@ -29,9 +27,9 @@ export const searchForProperties = (
 	return found;
 };
 
-export const getUsers = (page: number = 1, filterText: string = "") => {
+export const getUsers = (page: number = 1, searchText: string = "") => {
 	var filteredUsers = users.filter((user) =>
-		searchForProperties(user, filterText)
+		searchForProperties(user, searchText)
 	);
 
 	const startPage = page > 1 ? page * USERS_LIMIT : 0;

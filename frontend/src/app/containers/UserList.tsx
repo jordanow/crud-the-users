@@ -7,6 +7,7 @@ import { getUsers } from "../services/UserService";
 import UserDetailsCard from "../components/UserDetailsCard";
 import { AppReducer, initialAppState } from "../reducers/App";
 import { FETCH_USERS, SET_USERS } from "../reducers/App/constants";
+import SearchBar from "../components/SearchBar";
 
 const useStyles = makeStyles((theme) => ({
 	root: {
@@ -24,18 +25,19 @@ const useStyles = makeStyles((theme) => ({
 export default function UserList() {
 	const classes = useStyles();
 	const [currentPage, setCurrentPage] = useState<number>(1);
+	const [searchText, setSearchText] = useState<string>("");
 
 	const [state, dispatch] = useReducer(AppReducer, initialAppState);
 
 	useEffect(() => {
 		const fetchUsers = async () => {
 			dispatch({ type: FETCH_USERS });
-			const data = await getUsers(currentPage);
+			const data = await getUsers(currentPage, searchText);
 			dispatch({ type: SET_USERS, users: data.users });
 		};
 
 		fetchUsers();
-	}, [state.searchText, currentPage]);
+	}, [searchText, currentPage]);
 
 	const handleChangePage = (event: any, newPage: number) => {
 		setCurrentPage(newPage);
@@ -44,6 +46,12 @@ export default function UserList() {
 	return (
 		<Grid container className={classes.root} spacing={2}>
 			<Grid item xs={12}>
+				<Box my={2}>
+					<Grid container justify="center">
+						<SearchBar onChangeSearchInput={setSearchText} />
+					</Grid>
+				</Box>
+
 				<Grid container justify="center" spacing={2}>
 					{state.users.map((value) => (
 						<Grid key={value.email} item>

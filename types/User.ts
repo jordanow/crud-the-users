@@ -1,8 +1,3 @@
-export type IUserSearchParams = {
-	page: number;
-	filterText: string;
-};
-
 export type IUser = {
 	firstName: string;
 	lastName: string;
