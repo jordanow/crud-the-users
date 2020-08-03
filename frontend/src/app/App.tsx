@@ -6,7 +6,7 @@ import UserList from "./containers/UserList";
 
 export default function App() {
 	return (
-		<Container maxWidth="md">
+		<Container maxWidth="lg">
 			<Header />
 			<UserList />
 		</Container>

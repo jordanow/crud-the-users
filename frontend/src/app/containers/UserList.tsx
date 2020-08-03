@@ -3,11 +3,12 @@ import { makeStyles } from "@material-ui/core/styles";
 import Grid from "@material-ui/core/Grid";
 import Box from "@material-ui/core/Box";
 import Pagination from "@material-ui/lab/Pagination";
-import { getUsers } from "../services/UserService";
+import { getUsers, updateUserById } from "../services/UserService";
 import UserDetailsCard from "../components/UserDetailsCard";
 import { AppReducer, initialAppState } from "../reducers/App";
-import { FETCH_USERS, SET_USERS } from "../reducers/App/constants";
+import { FETCH_USERS, SET_USERS, UPDATE_USER } from "../reducers/App/constants";
 import SearchBar from "../components/SearchBar";
+import { IUser } from "../../../../types/User";
 
 const useStyles = makeStyles((theme) => ({
 	root: {
@@ -43,6 +44,16 @@ export default function UserList() {
 		setCurrentPage(newPage);
 	};
 
+	const onSubmitUserDetailsForm = (user: IUser) => {
+		dispatch({ type: UPDATE_USER, user });
+
+		const updateUser = async () => {
+      await updateUserById(user.id, user);
+		};
+
+		updateUser();
+	};
+
 	return (
 		<Grid container className={classes.root} spacing={2}>
 			<Grid item xs={12}>
@@ -55,7 +66,10 @@ export default function UserList() {
 				<Grid container justify="center" spacing={2}>
 					{state.users.map((value) => (
 						<Grid key={value.email} item>
-							<UserDetailsCard user={value} />
+							<UserDetailsCard
+								user={value}
+								onSubmitUserDetailsForm={onSubmitUserDetailsForm}
+							/>
 						</Grid>
 					))}
 				</Grid>

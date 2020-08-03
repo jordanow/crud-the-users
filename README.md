@@ -24,9 +24,11 @@
 ### Gaps
 - Pagination could be improved. Backend could return a number of total results and the frontend should build up the pagination using that count.
 - Search pagination is broken
-- 
+- There are no field validations on the user edit form
+- The user data is not updated on the backend in the json or any database/cache
 
 ### Assumptions
+- Few data fields are editable
 - 
 
 ### Future enhancements

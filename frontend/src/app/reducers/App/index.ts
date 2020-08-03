@@ -37,10 +37,28 @@ export function AppReducer(
 				isFetching: false,
 			};
 
+		case UPDATE_USER: {
+			const users = state.users;
+			state.users.map((user) => {
+				if (user.id === action.user.id) {
+					user = {
+						...action.user,
+					};
+				}
+				return user;
+			});
+
+			return {
+				...state,
+				users,
+				isFetching: false,
+			};
+		}
+
 		case FILTER_USERS:
 			return {
-        ...state,
-        searchText: action.searchText
+				...state,
+				searchText: action.searchText,
 			};
 
 		default:

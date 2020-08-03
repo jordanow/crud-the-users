@@ -42,3 +42,9 @@ export const getUsers = (page: number = 1, searchText: string = "") => {
 		users: filteredUsers,
 	};
 };
+
+export const updateUserById = (id: string, user: IUser) => {
+	return {
+		user,
+	};
+};
