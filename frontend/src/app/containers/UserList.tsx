@@ -3,7 +3,7 @@ import { makeStyles } from "@material-ui/core/styles";
 import Grid from "@material-ui/core/Grid";
 import Box from "@material-ui/core/Box";
 import Pagination from "@material-ui/lab/Pagination";
-import { getUsers, updateUserById } from "../services/UserService";
+import { getUsers, updateUserByUserName } from "../services/UserService";
 import UserDetailsCard from "../components/UserDetailsCard";
 import { AppReducer, initialAppState } from "../reducers/App";
 import { FETCH_USERS, SET_USERS, UPDATE_USER } from "../reducers/App/constants";
@@ -48,7 +48,7 @@ export default function UserList() {
 		dispatch({ type: UPDATE_USER, user });
 
 		const updateUser = async () => {
-      await updateUserById(user.id, user);
+      await updateUserByUserName(user.username, user);
 		};
 
 		updateUser();

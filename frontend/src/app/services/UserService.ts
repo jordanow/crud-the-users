@@ -7,7 +7,7 @@ const getUsers = async (
 ): Promise<IUserListResponse> => {
 	try {
 		const response = await axios.get(
-			`/api/users?page=${page}&searchText=${searchText}`
+			`/users?page=${page}&searchText=${searchText}`
 		);
 		return response.data;
 	} catch (error) {
@@ -16,9 +16,12 @@ const getUsers = async (
 	}
 };
 
-const updateUserById = async (id: number, user: IUser): Promise<IUser> => {
+const updateUserByUserName = async (
+	username: string,
+	user: IUser
+): Promise<IUser> => {
 	try {
-		const response = await axios.post(`/api/user/${user.id}`, {
+		const response = await axios.put(`/user/${username}`, {
 			user,
 		});
 		return response.data;
@@ -28,4 +31,4 @@ const updateUserById = async (id: number, user: IUser): Promise<IUser> => {
 	}
 };
 
-export { getUsers, updateUserById };
+export { getUsers, updateUserByUserName };
