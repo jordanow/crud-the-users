@@ -17,7 +17,11 @@ export const searchForProperties = (
 
 	SEARCHABLE_FIELDS.forEach((key) => {
 		const fieldValue: string = (user as any)[key];
-		if (fieldValue && fieldValue.toUpperCase().indexOf(searchTerm) > -1) {
+		if (
+			fieldValue &&
+			typeof fieldValue === "string" &&
+			fieldValue.toUpperCase().indexOf(searchTerm) > -1
+		) {
 			found = true;
 			return;
 		}
@@ -49,7 +53,7 @@ export const updateUserByUsername = (username: string, user: IUser) => {
 	};
 };
 
-export const createUser = (user: IUser) => {
+export const createUser = (user: Partial<IUser>) => {
 	return dbService.createUser(user);
 };
 

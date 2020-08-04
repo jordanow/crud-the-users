@@ -1,5 +1,5 @@
 import allUsers from "../data/users.json";
-import { IUser } from "../../../types/User";
+import { IUser, UserStatus } from "../../../types/User";
 
 const ALLOWED_FIELDS = [
 	"userStatus",
@@ -58,8 +58,19 @@ class DBService {
 	}
 
 	public createUser(user: Partial<IUser>): IUser {
-		const newUser: IUser = Object.create(user);
-		newUser.id = Date.now();
+		const newUser: IUser = {
+			firstName: "",
+			lastName: "",
+			email: "",
+			phone: "",
+			// override the passed properties
+			...user,
+
+      // Form new properties
+			id: Date.now(),
+			userStatus: UserStatus.INACTIVE,
+			username: `${user.firstName}-${user.lastName}`,
+		};
 
 		this.users.push(newUser);
 
@@ -76,7 +87,7 @@ class DBService {
 	}
 
 	public deleteUserByUsername(username: string): void {
-    this.users = this.users.filter((user) => user.username !== username);
+		this.users = this.users.filter((user) => user.username !== username);
 	}
 }
 

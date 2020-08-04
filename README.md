@@ -22,7 +22,7 @@
 - Run `npm start` in a new terminal
 
 ### Gaps
-- Pagination could be improved. Backend could return a number of total results and the frontend should build up the pagination using that count. Search pagination is broken
+- Pagination could be improved. Backend could return a number of total results and the frontend should build up the pagination using that count. Pagination on search results is broken
 - There are no field validations on the user edit form on the frontend nor on backend
 - There could be a real database used
 - Login, logout have not been implemented.

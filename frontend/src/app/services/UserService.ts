@@ -31,6 +31,18 @@ const updateUserByUserName = async (
 	}
 };
 
+const createNewUser = async (user: Partial<IUser>): Promise<IUser> => {
+	try {
+		const response = await axios.post(`/user`, {
+			user,
+		});
+		return response.data;
+	} catch (error) {
+		console.error(error);
+		throw error;
+	}
+};
+
 const deleteUserByUserName = async (username: string): Promise<null> => {
 	try {
 		return axios.delete(`/user/${username}`);
@@ -40,4 +52,4 @@ const deleteUserByUserName = async (username: string): Promise<null> => {
 	}
 };
 
-export { getUsers, updateUserByUserName, deleteUserByUserName };
+export { getUsers, updateUserByUserName, deleteUserByUserName, createNewUser };
