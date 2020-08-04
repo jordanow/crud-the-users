@@ -97,7 +97,6 @@ export default function UserList() {
 	};
 
 	const onCreateNewUser = (user: Partial<IUser>) => {
-    console.log(user);
     toggleNewUserModalVisibility();
     createNewUser(user);
     // To trigger page refresh
