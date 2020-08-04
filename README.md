@@ -28,6 +28,7 @@
 - Login, logout have not been implemented.
 - Since there are non unique usernames the update queries may or may not update the object we're trying to update
 - There is no confirmation on user deletion
+- Add more test cases for both frontend and backend.
 
 
 ### Assumptions
