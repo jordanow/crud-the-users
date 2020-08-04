@@ -134,10 +134,10 @@ export default function UserList() {
 				</Box>
 
 				<Grid container justify="center" spacing={2}>
-					{state.users.map((value) => (
-						<Grid key={value.email} item>
+					{state.users.map((user) => (
+						<Grid key={`${user.id}-${user.email}-${user.username}-${user.phone}`} item>
 							<UserDetailsCard
-								user={value}
+								user={user}
 								onSubmitUserDetailsForm={onSubmitUserDetailsForm}
 								onDeleteUser={onDeleteUser}
 							/>

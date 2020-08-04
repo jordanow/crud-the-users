@@ -14,7 +14,7 @@
 
 ### Backend
 
-- Run `npm run webpack` in a new terminal
+- Run `npm run webpack` in a new terminal (only if you want hot module replacement)
 - Run `npm start` in a new terminal
 
 ### Frontend
@@ -42,8 +42,9 @@
 Apart from fixing the gaps and getting rid of any assumptions (after getting a clear understanding of the requirements) we can:
 
 - Adding a authorisation flow to add a layer of security to the CRUD operations
-- The frontend could save its state to prevent data loss in case of browser crash/accidental window closure etc
-- Add caching on the frontend to prevent fetching the same data again and again from the backend, thereby limiting the load on backend servers
+- The frontend could save its state to prevent data loss in case of browser crash/accidental window closure etc. State management would be useful.
+- Add caching on the frontend to prevent fetching the same data again and again from the backend, thereby limiting the load on backend servers. 
+- Can use libraries like graphql to prevent creating multiple different endpoints on the backend and rather let frontend decide the api and data structure.
 - Fetching the user data from a real database and then using the search queries on the database to fetch the relevant data
 - We can also implement a better search functionality by using elasticsearch etc
 - Can implement login functionality by using libraries such as bcrypt to compare and store password hashes
