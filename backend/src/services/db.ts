@@ -48,8 +48,6 @@ class DBService {
 						(safelyUpdatedUser as any)[key] = fieldValue;
 					});
 
-					console.log(safelyUpdatedUser);
-
 					return safelyUpdatedUser as IUser;
 				}
 				return user;
@@ -78,7 +76,7 @@ class DBService {
 	}
 
 	public deleteUserByUsername(username: string): void {
-		this.users = this.users.filter((user) => user.username !== username);
+    this.users = this.users.filter((user) => user.username !== username);
 	}
 }
 

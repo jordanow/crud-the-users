@@ -1,5 +1,11 @@
 import { IUser } from "../../../../../types/User";
-import { FETCH_USERS, SET_USERS, UPDATE_USER, FILTER_USERS } from "./constants";
+import {
+	FETCH_USERS,
+	SET_USERS,
+	UPDATE_USER,
+	FILTER_USERS,
+	DELETE_USER,
+} from "./constants";
 
 type IAppState = {
 	users: IUser[];
@@ -10,6 +16,7 @@ type IAppState = {
 type Action =
 	| { type: typeof FETCH_USERS }
 	| { type: typeof SET_USERS; users: IUser[] }
+	| { type: typeof DELETE_USER; username: string }
 	| { type: typeof UPDATE_USER; user: IUser }
 	| { type: typeof FILTER_USERS; searchText: string };
 
@@ -52,6 +59,16 @@ export function AppReducer(
 				...state,
 				users,
 				isFetching: false,
+			};
+		}
+
+		case DELETE_USER: {
+			const users = state.users.filter(
+				(user) => user.username !== action.username
+			);
+			return {
+				...state,
+				users,
 			};
 		}
 

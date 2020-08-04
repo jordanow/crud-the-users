@@ -3,10 +3,14 @@ import { makeStyles } from "@material-ui/core/styles";
 import Grid from "@material-ui/core/Grid";
 import Box from "@material-ui/core/Box";
 import Pagination from "@material-ui/lab/Pagination";
-import { getUsers, updateUserByUserName } from "../services/UserService";
+import {
+	getUsers,
+	updateUserByUserName,
+	deleteUserByUserName,
+} from "../services/UserService";
 import UserDetailsCard from "../components/UserDetailsCard";
 import { AppReducer, initialAppState } from "../reducers/App";
-import { FETCH_USERS, SET_USERS, UPDATE_USER } from "../reducers/App/constants";
+import { FETCH_USERS, SET_USERS, UPDATE_USER, DELETE_USER } from "../reducers/App/constants";
 import SearchBar from "../components/SearchBar";
 import { IUser } from "../../../../types/User";
 
@@ -36,7 +40,6 @@ export default function UserList() {
 			const data = await getUsers(currentPage, searchText);
 			dispatch({ type: SET_USERS, users: data.users });
 		};
-
 		fetchUsers();
 	}, [searchText, currentPage]);
 
@@ -48,10 +51,15 @@ export default function UserList() {
 		dispatch({ type: UPDATE_USER, user });
 
 		const updateUser = async () => {
-      await updateUserByUserName(user.username, user);
+			await updateUserByUserName(user.username, user);
 		};
 
 		updateUser();
+	};
+
+	const onDeleteUser = (username: string) => {
+    dispatch({ type: DELETE_USER, username });
+		deleteUserByUserName(username);
 	};
 
 	return (
@@ -69,6 +77,7 @@ export default function UserList() {
 							<UserDetailsCard
 								user={value}
 								onSubmitUserDetailsForm={onSubmitUserDetailsForm}
+								onDeleteUser={onDeleteUser}
 							/>
 						</Grid>
 					))}

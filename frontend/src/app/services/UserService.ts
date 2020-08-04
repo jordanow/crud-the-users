@@ -31,4 +31,13 @@ const updateUserByUserName = async (
 	}
 };
 
-export { getUsers, updateUserByUserName };
+const deleteUserByUserName = async (username: string): Promise<null> => {
+	try {
+		return axios.delete(`/user/${username}`);
+	} catch (error) {
+		console.error(error);
+		throw error;
+	}
+};
+
+export { getUsers, updateUserByUserName, deleteUserByUserName };

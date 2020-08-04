@@ -20,7 +20,8 @@ const useStyles = makeStyles({
 
 type UserDetailsCardProps = {
 	user: IUser;
-	onSubmitUserDetailsForm: (user: IUser) => void;
+  onSubmitUserDetailsForm: (user: IUser) => void;
+  onDeleteUser: (username: string) => void;
 };
 
 export default function UserDetailsCard(props: UserDetailsCardProps) {
@@ -37,9 +38,14 @@ export default function UserDetailsCard(props: UserDetailsCardProps) {
 
 	const onSubmit = (event: FormEvent<HTMLFormElement>) => {
 		event.preventDefault();
-    props.onSubmitUserDetailsForm(user);
-    setEditMode(false);
-	};
+		props.onSubmitUserDetailsForm(user);
+		setEditMode(false);
+  };
+  
+  const deleteUser = () => {
+    props.onDeleteUser(user.username);
+		setEditMode(false);
+  }
 
 	const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
 		setUserDetails({
@@ -76,7 +82,7 @@ export default function UserDetailsCard(props: UserDetailsCardProps) {
 							variant="standard"
 							name="lastName"
 							value={user.lastName}
-              disabled={!editMode}
+							disabled={!editMode}
 							onChange={handleChange}
 						/>
 						<TextField
@@ -91,9 +97,14 @@ export default function UserDetailsCard(props: UserDetailsCardProps) {
 						/>
 						<Box my={2}>
 							{editMode ? (
-								<Button variant="contained" color="primary" type="submit">
-									Submit
-								</Button>
+								<Grid container justify="space-between">
+									<Button variant="contained" color="primary" type="submit">
+										Submit
+									</Button>
+									<Button variant="outlined" onClick={deleteUser}>
+										Delete
+									</Button>
+								</Grid>
 							) : (
 								<Box my={5} />
 							)}

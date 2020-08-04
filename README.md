@@ -27,6 +27,7 @@
 - There could be a real database used
 - Login, logout have not been implemented.
 - Since there are non unique usernames the update queries may or may not update the object we're trying to update
+- There is no confirmation on user deletion
 
 
 ### Assumptions
